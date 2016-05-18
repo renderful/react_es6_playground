@@ -5335,9 +5335,9 @@
 	  }
 
 	  _createClass(Photo, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
-	      return React.createElement("img", { alt: this.props.caption, src: this.props.src });
+	      return React.createElement('img', { alt: this.props.caption, src: this.props.src });
 	    }
 	  }]);
 
@@ -5354,19 +5354,17 @@
 	  }
 
 	  _createClass(Forward, [{
-	    key: "handleChange",
+	    key: 'handleChange',
 	    value: function handleChange() {
-	      barData[0].name = "CODEY";
-	      console.log(barData);
-	      console.log(BarChart());
+	      console.log('click');
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
-	        "button",
+	        'button',
 	        { onClick: this.handleChange },
-	        "Forward"
+	        'Forward'
 	      );
 	    }
 	  }]);
@@ -5396,15 +5394,15 @@
 	  }
 
 	  _createClass(Chart, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return React.createElement(BarChart, {
 	        data: barData,
 	        width: 500,
 	        height: 300,
-	        title: "Bar Chart",
-	        xAxisLabel: "Value",
-	        yAxisLabel: "Label"
+	        title: 'Bar Chart',
+	        xAxisLabel: 'Value',
+	        yAxisLabel: 'Label'
 	      });
 	    }
 	  }]);
@@ -5414,9 +5412,9 @@
 
 	(function () {
 	  ReactDOM.render(React.createElement(
-	    "div",
+	    'div',
 	    null,
-	    React.createElement(Photo, { caption: "codey", src: "image.jpg" }),
+	    React.createElement(Photo, { caption: 'codey', src: 'image.jpg' }),
 	    React.createElement(Forward, null),
 	    React.createElement(Chart, null)
 	  ), document.getElementById('container'));

@@ -8,9 +8,7 @@ class Photo extends React.Component {
 
 class Forward extends React.Component {
     handleChange() {
-        barData[0].name = "CODEY";
-        console.log(barData);
-        console.log(BarChart());
+        console.log('click');
     }
 
     render() {
