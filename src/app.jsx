@@ -1,8 +1,38 @@
 'use strict';
 
-class Photo extends React.Component {
+class PhotoList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    };
+  }
+
+  componentDidMount() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  }
+
   render() {
-    return <img alt={this.props.caption} src={this.props.src} />;
+    console.log(this.props);
+    var photos = this.state.data.map(function(photo) {
+      return <img alt={photo.name} src={photo.url} />;
+    });
+    
+    return (
+              <div id="photoList">
+                {photos}
+              </div>
+    );
   }
 }
 
@@ -60,7 +90,7 @@ class Chart extends React.Component {
 
 (function() {
     ReactDOM.render(<div>
-                        <Photo caption="codey" src="image.jpg" />
+                        <PhotoList url="/api/images" />
                         <Forward />
                         <Chart />
                     </div>

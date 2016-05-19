@@ -5325,23 +5325,52 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Photo = function (_React$Component) {
-	  _inherits(Photo, _React$Component);
+	var PhotoList = function (_React$Component) {
+	  _inherits(PhotoList, _React$Component);
 
-	  function Photo() {
-	    _classCallCheck(this, Photo);
+	  function PhotoList(props) {
+	    _classCallCheck(this, PhotoList);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Photo).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PhotoList).call(this, props));
+
+	    _this.state = {
+	      data: []
+	    };
+	    return _this;
 	  }
 
-	  _createClass(Photo, [{
+	  _createClass(PhotoList, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      $.ajax({
+	        url: this.props.url,
+	        dataType: 'json',
+	        cache: false,
+	        success: function (data) {
+	          this.setState({ data: data });
+	        }.bind(this),
+	        error: function (xhr, status, err) {
+	          console.error(this.props.url, status, err.toString());
+	        }.bind(this)
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return React.createElement('img', { alt: this.props.caption, src: this.props.src });
+	      console.log(this.props);
+	      var photos = this.state.data.map(function (photo) {
+	        return React.createElement('img', { alt: photo.name, src: photo.url });
+	      });
+
+	      return React.createElement(
+	        'div',
+	        { id: 'photoList' },
+	        photos
+	      );
 	    }
 	  }]);
 
-	  return Photo;
+	  return PhotoList;
 	}(React.Component);
 
 	var Forward = function (_React$Component2) {
@@ -5414,7 +5443,7 @@
 	  ReactDOM.render(React.createElement(
 	    'div',
 	    null,
-	    React.createElement(Photo, { caption: 'codey', src: 'image.jpg' }),
+	    React.createElement(PhotoList, { url: '/api/images' }),
 	    React.createElement(Forward, null),
 	    React.createElement(Chart, null)
 	  ), document.getElementById('container'));
